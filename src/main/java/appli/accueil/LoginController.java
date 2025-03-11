@@ -44,7 +44,6 @@ public class LoginController {
         welcomeText.setText(" sa arrive!");
     }
 
-    public set
     public void btnConnection(javafx.event.ActionEvent actionEvent) {
         String email = Connection.getText();
         String mdp = PasswordField.getText();
