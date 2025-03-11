@@ -1,6 +1,8 @@
 module appli.todolistfx {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
+    requires java.xml.crypto;
 
 
     opens appli to javafx.fxml;
