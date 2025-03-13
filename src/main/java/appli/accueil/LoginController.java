@@ -1,56 +1,53 @@
 package appli.accueil;
 
+import appli.StartApplication;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.event.ActionEvent;
 
-import javax.xml.crypto.dsig.spec.XSLTTransformParameterSpec;
-import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 public class LoginController {
-    @FXML
-    private Label welcomeText;
-
 
     @FXML
-    private Label lblMdp;
-    @FXML
-    private PasswordField mdp;
+    private TextField emailField;
 
     @FXML
-    protected void setMdp (ActionEvent event) {
-        this.mdp = mdp ;
-    }
+    private PasswordField passwordField;
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
-
+    private Label errorLabel;
 
     @FXML
     public void btnConnection(ActionEvent event) {
+        String email = emailField.getText();
+        String mdp = passwordField.getText();
 
+        System.out.println("Email : " + email);
 
+        if (email.isEmpty() || mdp.isEmpty()) {
+            errorLabel.setText("Tous les champs sont obligatoires !");
+            errorLabel.setVisible(true);
+        } else if (email.equals("mathis@gmail.com") && mdp.equals("123")) {
+            System.out.println("Connexion réussie !");
+            errorLabel.setVisible(false);
+        } else {
+            errorLabel.setText("Identifiants incorrects !");
+            errorLabel.setVisible(true);
+        }
     }
 
     @FXML
-    protected void boutonInscription() {
-        welcomeText.setText("Welcome to !");
+    protected void boutonInscription() throws IOException {
+        System.out.println("Redirection vers la page d'inscription !");
+        StartApplication.changeScene("accueil/Inscription");
+
     }
 
     @FXML
     protected void boutonMdpOublier() {
-        welcomeText.setText(" sa arrive!");
-    }
-
-    public void btnConnection(javafx.event.ActionEvent actionEvent) {
-        String email = Connection.getText();
-        String mdp = PasswordField.getText();
-        System.out.println("email = " + email);
-        if (mdp.equals("123") && email.equals("mathis@gmail.com")) {}
-        if (mdp.isEmpty()  && email.isEmpty()) {
-            System.out.println(" toute les champs sont obligatoires!");
-        } else
+        System.out.println("Redirection vers la récupération de mot de passe !");
     }
 }
