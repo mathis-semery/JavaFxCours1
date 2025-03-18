@@ -2,9 +2,41 @@ package modele;
 
 public class Utilisateur {
     private  int id;
-private String nom;
-private String prenom;
-private String email;
+    private String nom;
+    private String prenom;
+    private String email;
+    private String mdp;
+    private String role;
+
+
+
+    public Utilisateur(int id, String nom, String prenom, String email, String mdp , String role) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.mdp = mdp;
+        this.role = role;
+    }
+    public Utilisateur(String nom, String prenom, String email, String mdp , String role) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.mdp = mdp;
+        this.role = role;
+    }
+    public Utilisateur(String email, String mdp) {
+        this.email = email;
+        this.mdp = mdp;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
 
     public int getId() {
         return id;
@@ -22,14 +54,6 @@ private String email;
         this.nom = nom;
     }
 
-    public String getMdp() {
-        return mdp;
-    }
-
-    public void setMdp(String mdp) {
-        this.mdp = mdp;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -38,37 +62,23 @@ private String email;
         this.email = email;
     }
 
-    public String getPrenom() {
-        return prenom;
+    public String getMdp() {
+        return mdp;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public void setMdp(String mdp) {
+        this.mdp = mdp;
+    }
+    public String getRole() {
+        return role;
+    }
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    private String mdp;
-
-public Utilisateur(int id, String nom, String prenom, String email, String mdp) {
-    this.id = id;
-    this.nom = nom;
-    this.prenom = prenom;
-    this.email = email;
-    this.mdp = mdp;
-
-}
-public Utilisateur(String nom, String prenom, String email, String mdp) {
-    this.nom = nom;
-    this.prenom = prenom;
-    this.email = email;
-    this.mdp = mdp;
-}
-public Utilisateur(String email, String mdp) {
-    this.email = email;
-    this.mdp = mdp;
-}
 
     @Override
     public String toString() {
-        return super.toString();
+        return nom + " " + prenom ;
     }
 }

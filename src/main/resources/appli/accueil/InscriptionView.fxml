@@ -32,7 +32,7 @@
 
     <Label fx:id="errorLabel" textFill="red" visible="false"/>
 
-    <Button onAction="#RetourInscription" text="S'inscrire"/>
+    <Button onAction="#Inscription" text="S'inscrire"/>
     <Button onAction="#RetourConnexion" text="Retour à la Connexion"/>
 
 </VBox>

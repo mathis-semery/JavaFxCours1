@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import appli.StartApplication;
+import modele.Utilisateur;
+import Repository.UtilisateurRepository;
 
 import java.io.IOException;
 
@@ -25,7 +27,7 @@ public class IncriptionController {
     private Label errorLabel;
 
     @FXML
-    public void RetourInscription() throws IOException {
+    public void Inscription() throws IOException {
         String nom = nomField.getText();
         String prenom = prenomField.getText();
         String email = emailField.getText();
@@ -35,6 +37,9 @@ public class IncriptionController {
         if (nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || password.isEmpty() ) {
             errorLabel.setText("Tous les champs doivent être remplis.");
             return;
+        } else if (!email.equals(getEmailById)) {
+            errorLabel.setText("Email non enregister en base de donnée ");
+            
         }
 
 
