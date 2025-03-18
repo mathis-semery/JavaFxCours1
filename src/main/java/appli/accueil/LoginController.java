@@ -1,11 +1,13 @@
 package appli.accueil;
 
+import Repository.UtilisateurRepository;
 import appli.StartApplication;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
+import modele.Utilisateur;
 
 import java.io.IOException;
 
@@ -24,14 +26,13 @@ public class LoginController {
     public void btnConnection(ActionEvent event) {
         String email = emailField.getText();
         String mdp = passwordField.getText();
-
-        System.out.println("Email : " + email);
+        UtilisateurRepository utilisateurRepository = new UtilisateurRepository();
 
         if (email.isEmpty() || mdp.isEmpty()) {
             errorLabel.setText("Tous les champs sont obligatoires !");
             errorLabel.setVisible(true);
-        } else if (email.equals("mathis@gmail.com") && mdp.equals("123")) {
-            System.out.println("Connexion réussie !");
+        } else if (utilisateurRepository.ConnectionUser(email , mdp) != null ) {
+         System.out.println("Connexion réussi !");
             errorLabel.setVisible(false);
         } else {
             errorLabel.setText("Identifiants incorrects !");

@@ -32,29 +32,23 @@ public class IncriptionController {
         String prenom = prenomField.getText();
         String email = emailField.getText();
         String password = passwordField.getText();
+        String role = "client";
 
+        UtilisateurRepository utilisateurRepository = new UtilisateurRepository();
 
         if (nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || password.isEmpty() ) {
             errorLabel.setText("Tous les champs doivent être remplis.");
-            return;
-        } else if (!email.equals(getEmailById)) {
-            errorLabel.setText("Email non enregister en base de donnée ");
-            
+        } else if (utilisateurRepository.getUtilisateurByEmail(email) != null ) {;
+            errorLabel.setText("l'email est deja utilisé ");
+        }else {
+            System.out.println("Inscription en cours ...");
+            Utilisateur user  = new Utilisateur(nom, prenom, email, password, role);
+
+            utilisateurRepository.ajouterUtilisateur(user);
+
+            System.out.println("vous êtes bien Inscrit");
+            StartApplication.changeScene("accueil/Login");
         }
-
-
-        if (email.equals("test@example.com")) {
-            errorLabel.setText("Cet email est déjà utilisé.");
-            return;
-        }
-
-        System.out.println("Nom: " + nom);
-        System.out.println("Prénom: " + prenom);
-        System.out.println("Email: " + email);
-        System.out.println("Mot de passe: " + password);
-
-        System.out.println("vous êtes bien Inscrit");
-        StartApplication.changeScene("accueil/Login");
     }
 
     @FXML
