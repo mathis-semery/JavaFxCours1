@@ -9,6 +9,7 @@ import javafx.scene.control.Alert.AlertType;
 import appli.StartApplication;
 import modele.Utilisateur;
 import Repository.UtilisateurRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.io.IOException;
 
@@ -42,9 +43,19 @@ public class IncriptionController {
             errorLabel.setText("l'email est deja utilisé ");
         }else {
             System.out.println("Inscription en cours ...");
-            Utilisateur user  = new Utilisateur(nom, prenom, email, password, role);
 
-            utilisateurRepository.ajouterUtilisateur(user);
+            BCryptPasswordEncoder mdpH = new BCryptPasswordEncoder();
+            String hPassword = mdpH.encode(password);
+            Utilisateur user  = new Utilisateur(nom, prenom, email, hPassword, role);
+
+            try {
+                utilisateurRepository.ajouterUtilisateur(user);
+            } catch (Exception e) {
+                e.printStackTrace();
+                errorLabel.setText("Une erreur est survenue lors de l'inscription.");
+            }
+
+
 
             System.out.println("vous êtes bien Inscrit");
             StartApplication.changeScene("accueil/Login");
