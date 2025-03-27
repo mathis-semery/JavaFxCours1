@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class UtilisateurRepository {
 
@@ -122,4 +123,33 @@ public class UtilisateurRepository {
             System.out.println("Erreur lors de l'ajout de l'utilisateur : " + e.getMessage());
         }
     }
+
+    public ArrayList<Utilisateur> getTousLesUtilisateurs() {
+        ArrayList<Utilisateur> utilisateurs = new ArrayList<>();
+        String sql = "SELECT * FROM utilisateur";
+        try (PreparedStatement stmt = this.cnx.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Utilisateur user = new Utilisateur(
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getString("email"),
+                        rs.getString("mot_de_passe"),
+                        rs.getString("role")
+                );
+                utilisateurs.add(user);
+            }
+
+            if (utilisateurs.isEmpty()) {
+                System.out.println("Aucun utilisateur trouvé dans la base de données.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur SQL : " + e.getMessage());
+        }
+
+        return utilisateurs;
+    }
+
 }

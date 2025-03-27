@@ -55,8 +55,6 @@ public class IncriptionController {
                 errorLabel.setText("Une erreur est survenue lors de l'inscription.");
             }
 
-
-
             System.out.println("vous êtes bien Inscrit");
             StartApplication.changeScene("accueil/Login");
         }
