@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import session.SessionUtilisateur;
 
 
+
 import java.io.IOException;
 
 public class LoginController {
@@ -27,7 +28,7 @@ public class LoginController {
 
 
 
-    public void btnConnection(ActionEvent event) {
+    public void btnConnection(ActionEvent event) throws IOException {
         String email = emailField.getText();
         String mdp = passwordField.getText();
         UtilisateurRepository utilisateurRepository = new UtilisateurRepository();
@@ -42,6 +43,8 @@ public class LoginController {
             System.out.println("Connexion réussie !");
             SessionUtilisateur.getInstance().sauvegardeSession(user);
             errorLabel.setVisible(false);
+            StartApplication.changeScene("user/GestionUser");
+
         } else {
             errorLabel.setText("Identifiants incorrects !");
             errorLabel.setVisible(true);
