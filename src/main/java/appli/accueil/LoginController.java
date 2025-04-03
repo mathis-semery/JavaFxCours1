@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import modele.Utilisateur;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import session.SessionUtilisateur;
 
 
 import java.io.IOException;
@@ -39,6 +40,7 @@ public class LoginController {
             errorLabel.setVisible(true);
         } else if (user != null && passwordEncoder.matches(mdp, user.getMdp())) {
             System.out.println("Connexion réussie !");
+            SessionUtilisateur.getInstance().sauvegardeSession(user);
             errorLabel.setVisible(false);
         } else {
             errorLabel.setText("Identifiants incorrects !");
@@ -55,5 +57,11 @@ public class LoginController {
     @FXML
     protected void boutonMdpOublier() {
         System.out.println("Redirection vers la récupération de mot de passe !");
+    }
+
+    protected void handleLogout() {
+        SessionUtilisateur.getInstance().deconnecter();
+        System.out.println("Utilisateur déconnecté.");
+
     }
 }
