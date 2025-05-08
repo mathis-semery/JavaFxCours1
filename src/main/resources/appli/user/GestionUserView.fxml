@@ -4,8 +4,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
+<?import javafx.scene.control.Button?>
 <AnchorPane prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.user.GestionUserController">
     <children>
         <TableView fx:id="tableauUser" layoutX="40.0" layoutY="11.0" prefHeight="700.0" prefWidth="1000.0" />
+        <Button fx:id="Supprimer" onAction="#supprimer" text="Supprimer"/>
     </children>
+
 </AnchorPane>

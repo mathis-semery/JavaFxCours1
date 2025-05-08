@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="appli.user.GestionUserController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    @FXML
+    private TextField email;
+
+    @FXML
+    private TextField mdp;
+
+    @FXML
+    private TextField nom;
+
+    @FXML
+    private TextField prenom;
+
+    @FXML
+    private PasswordField role;
+
+    }
+</AnchorPane>
+
+

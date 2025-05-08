@@ -1,6 +1,8 @@
 package appli.user;
 
 import Repository.UtilisateurRepository;
+import appli.StartApplication;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -9,6 +11,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import modele.Utilisateur;
+
+import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -42,5 +47,32 @@ public class GestionUserController implements Initializable {
 
 
         tableauUser.getItems().addAll(observableUserList);
+
+        tableauUser.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2 && tableauUser.getSelectionModel().getSelectedItem() != null) {
+                Utilisateur utilisateur = tableauUser.getSelectionModel().getSelectedItem();
+                try {
+                    StartApplication.changeScene("user/Update");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        });
+
     }
+
+
+
+    public void supprimer(ActionEvent actionEvent) {
+        UtilisateurRepository utilisateurRepository = new UtilisateurRepository();
+        String email =  tableauUser.getSelectionModel().getSelectedItem().getEmail();
+        utilisateurRepository.deleteByEmail(email);
+    }
+
+    public void modifier(ActionEvent actionEvent) {
+
+    }
+
+
 }
