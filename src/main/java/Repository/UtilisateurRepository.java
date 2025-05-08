@@ -9,13 +9,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import static Database.Database.getConnexion;
+
 public class UtilisateurRepository {
 
 
     private Connection cnx;
 
     public UtilisateurRepository() {
-        this.cnx = Database.getConnexion();
+        this.cnx = getConnexion();
     }
 
     public void ajouterUtilisateur(Utilisateur utilisateur) {
@@ -151,5 +153,24 @@ public class UtilisateurRepository {
 
         return utilisateurs;
     }
+
+    public void updateUtilisateur(Utilisateur utilisateur) {
+        String sql = "UPDATE utilisateurs SET nom = ?, prenom = ?, email = ?, role = ? WHERE id = ?";
+        try (Connection conn = getConnexion();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, utilisateur.getNom());
+            stmt.setString(2, utilisateur.getPrenom());
+            stmt.setString(3, utilisateur.getEmail());
+            stmt.setString(4, utilisateur.getRole());
+            stmt.setInt(5, utilisateur.getId());
+
+            stmt.executeUpdate();
+            System.out.println("Utilisateur mis à jour : " + utilisateur);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
