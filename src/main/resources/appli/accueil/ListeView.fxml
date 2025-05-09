@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="appli.accueil.ListeController">
+
+    <TableView fx:id="tableListes" prefHeight="200" prefWidth="400">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="colNom" text="Nom de la liste" prefWidth="250"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10">
+        <TextField fx:id="nomField" promptText="Nom de la liste"/>
+        <Button text="Ajouter" onAction="#ajouterListe"/>
+        <Button text="Modifier" onAction="#ListeModifier"/>
+        <Button text="Supprimer" onAction="#ListeSupprimer"/>
+    </HBox>
+</VBox>

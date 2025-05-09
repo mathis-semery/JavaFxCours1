@@ -2,10 +2,10 @@ module appli.todolistfx {
     requires javafx.base;
     requires javafx.controls;
     requires javafx.fxml;
-    requires java.desktop;
     requires java.xml.crypto;
     requires java.sql;
     requires spring.security.crypto;
+    requires jakarta.mail;
 
     opens appli to javafx.fxml;
     exports appli;

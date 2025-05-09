@@ -12,6 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import modele.Utilisateur;
+import session.SessionUtilisateur;
 
 import java.io.IOException;
 import java.net.URL;
@@ -47,17 +48,17 @@ public class GestionUserController implements Initializable {
 
         TableColumn<Utilisateur, Integer> idColonne = new TableColumn<>("Id Utilisateur");
         idColonne.setCellValueFactory(new PropertyValueFactory<>("id"));
-        idColonne.setEditable(false); // On ne modifie pas l'ID
+        idColonne.setEditable(false);
 
         TableColumn<Utilisateur, String> nomColonne = new TableColumn<>("Nom");
         nomColonne.setCellValueFactory(new PropertyValueFactory<>("nom"));
         nomColonne.setCellFactory(TextFieldTableCell.forTableColumn());
         nomColonne.setOnEditCommit(event -> {
-            // Récupérer l'utilisateur et mettre à jour le champ "nom"
+
             Utilisateur utilisateur = event.getRowValue();
             utilisateur.setNom(event.getNewValue());
 
-            new UtilisateurRepository().updateUtilisateur(utilisateur);
+            new UtilisateurRepository().modifierUtilisateur(utilisateur);
         });
 
 
@@ -69,7 +70,7 @@ public class GestionUserController implements Initializable {
             utilisateur.setPrenom(event.getNewValue());
 
          
-            new UtilisateurRepository().updateUtilisateur(utilisateur);
+            new UtilisateurRepository().modifierUtilisateur(utilisateur);
         });
 
     
@@ -81,8 +82,9 @@ public class GestionUserController implements Initializable {
             utilisateur.setEmail(event.getNewValue());
 
 
-            new UtilisateurRepository().updateUtilisateur(utilisateur);
+            new UtilisateurRepository().modifierUtilisateur(utilisateur);
         });
+
 
 
         TableColumn<Utilisateur, String> roleColonne = new TableColumn<>("Rôle");
@@ -92,8 +94,9 @@ public class GestionUserController implements Initializable {
             Utilisateur utilisateur = event.getRowValue();
             utilisateur.setRole(event.getNewValue());
 
-      
-            new UtilisateurRepository().updateUtilisateur(utilisateur);
+
+            UtilisateurRepository utilisateurRepository = new UtilisateurRepository();
+            utilisateurRepository.modifierUtilisateur(utilisateur);
         });
 
         tableauUser.getColumns().addAll(idColonne, nomColonne, prenomColonne, emailColonne, roleColonne);
@@ -125,7 +128,13 @@ public class GestionUserController implements Initializable {
         System.out.println("Utilisateur supprimé avec succès !");
     }
 
-    public void modifier(ActionEvent actionEvent) {
-        System.out.println("La fonctionnalité de modification via bouton est à implémenter.");
+    @FXML
+    protected void boutonListe() throws IOException {
+
+        System.out.println("Redirection vers Les Listes!");
+        StartApplication.changeScene("accueil/Liste");
+
     }
+
+
 }

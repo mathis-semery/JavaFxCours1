@@ -135,6 +135,8 @@ public class UtilisateurRepository {
             while (rs.next()) {
 
                 Utilisateur user = new Utilisateur(
+                        rs.getInt("id_utilisateur"),
+
                         rs.getString("nom"),
                         rs.getString("prenom"),
                         rs.getString("email"),
@@ -154,8 +156,8 @@ public class UtilisateurRepository {
         return utilisateurs;
     }
 
-    public void updateUtilisateur(Utilisateur utilisateur) {
-        String sql = "UPDATE utilisateurs SET nom = ?, prenom = ?, email = ?, role = ? WHERE id = ?";
+    public void modifierUtilisateur(Utilisateur utilisateur) {
+        String sql = "UPDATE utilisateur SET nom = ?, prenom = ?, email = ?, role = ? WHERE id_utilisateur = ?";
         try (Connection conn = getConnexion();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -168,7 +170,7 @@ public class UtilisateurRepository {
             stmt.executeUpdate();
             System.out.println("Utilisateur mis à jour : " + utilisateur);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Erreur SQL : " + e.getMessage());
         }
     }
 

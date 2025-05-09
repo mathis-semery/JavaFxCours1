@@ -1,13 +1,13 @@
 package modele;
 
 public class Liste {
-    private String id ;
+    private int id ;
 
 
     private  String nom;
 
 
-    public Liste(String id, String nom) {
+    public Liste(int id, String nom) {
         this.id = id;
         this.nom = nom;
     }
@@ -15,11 +15,11 @@ public class Liste {
     public Liste( String nom) {
         this.nom = nom;
     }
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
